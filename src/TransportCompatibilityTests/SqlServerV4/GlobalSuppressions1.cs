@@ -5,4 +5,4 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Code", "PCR0002:Await or Capture Tasks", Justification = "<Pending>", Scope = "member", Target = "~M:SqlServerV4.Handler.Handle(TransportCompatibilityTests.Common.Messages.TestRequest,NServiceBus.IMessageHandlerContext)~System.Threading.Tasks.Task")]
+[assembly: SuppressMessage("Code", "PCR0002:Await or Capture Tasks", Justification = "Intentionally not capturing tasks", Scope = "member", Target = "~M:SqlServerV4.Handler.Handle(TransportCompatibilityTests.Common.Messages.TestRequest,NServiceBus.IMessageHandlerContext)~System.Threading.Tasks.Task")]

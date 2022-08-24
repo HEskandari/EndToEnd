@@ -16,11 +16,9 @@ namespace SqlServerV4
             return Task.FromResult(0);
         }
 
-        public Task Handle(TestRequest message, IMessageHandlerContext context)
+        public async Task Handle(TestRequest message, IMessageHandlerContext context)
         {
-            context.Reply(new TestResponse {ResponseId = message.RequestId});
-
-            return Task.FromResult(0);
+            await context.Reply(new TestResponse {ResponseId = message.RequestId});
         }
 
         public Task Handle(TestResponse message, IMessageHandlerContext context)

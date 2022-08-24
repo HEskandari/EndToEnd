@@ -4,7 +4,7 @@
 
     public class SqlServerConnectionStringBuilder
     {
-        public static string EnvironmentVariable => "SqlServer.ConnectionString";
+        public static string EnvironmentVariable => "SqlServer_ConnectionString";
 
         public static string Build()
         {

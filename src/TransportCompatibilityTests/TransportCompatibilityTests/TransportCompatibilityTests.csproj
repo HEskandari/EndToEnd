@@ -1,130 +1,33 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\..\packages\Particular.CodeRules.0.7.0\build\Particular.CodeRules.props" Condition="Exists('..\..\..\packages\Particular.CodeRules.0.7.0\build\Particular.CodeRules.props')" />
-  <Import Project="..\..\..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.3.3.0\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props" Condition="Exists('..\..\..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.3.3.0\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props')" />
-  <Import Project="..\..\..\packages\Microsoft.NetFramework.Analyzers.3.3.0\build\Microsoft.NetFramework.Analyzers.props" Condition="Exists('..\..\..\packages\Microsoft.NetFramework.Analyzers.3.3.0\build\Microsoft.NetFramework.Analyzers.props')" />
-  <Import Project="..\..\..\packages\Microsoft.NetCore.Analyzers.3.3.0\build\Microsoft.NetCore.Analyzers.props" Condition="Exists('..\..\..\packages\Microsoft.NetCore.Analyzers.3.3.0\build\Microsoft.NetCore.Analyzers.props')" />
-  <Import Project="..\..\..\packages\Microsoft.CodeQuality.Analyzers.3.3.0\build\Microsoft.CodeQuality.Analyzers.props" Condition="Exists('..\..\..\packages\Microsoft.CodeQuality.Analyzers.3.3.0\build\Microsoft.CodeQuality.Analyzers.props')" />
-  <Import Project="..\..\..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.3.3.0\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props" Condition="Exists('..\..\..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.3.3.0\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BFE9635E-E2B4-46A3-AC73-2C4E07A788E0}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TransportCompatibilityTests</RootNamespace>
-    <AssemblyName>TransportCompatibilityTests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <TargetFramework>net452</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
+  
   <ItemGroup>
     <Compile Include="..\..\GlobalSuppressions.cs">
       <Link>GlobalSuppressions.cs</Link>
     </Compile>
-    <Compile Include="AmazonSQS\Callbacks.cs" />
-    <Compile Include="AmazonSQS\Infrastructure\AmazonSqsContext.cs" />
-    <Compile Include="AmazonSQS\MessageExchangePatterns.cs" />
-    <Compile Include="AssertExtensions.cs" />
-    <Compile Include="AzureServiceBus\Callbacks.cs" />
-    <Compile Include="AzureServiceBus\Infrastructure\AzureServiceBusContext.cs" />
-    <Compile Include="AzureServiceBus\MessageExchangePatterns.cs" />
-    <Compile Include="AzureStorageQueues\Infrastructure\AzureStorageQueueContext.cs" />
-    <Compile Include="AzureStorageQueues\MessageExchangePatterns.cs" />
-    <Compile Include="GlobalSuppressions1.cs" />
-    <Compile Include="RabbitMQ\Callbacks.cs" />
-    <Compile Include="RabbitMQ\Infrastructure\RabbitMqContext.cs" />
-    <Compile Include="SqlServer\Infrastructure\SqlServerContext.cs" />
-    <Compile Include="RabbitMQ\MessageExchangePatterns.cs" />
-    <Compile Include="SqlServer\Callbacks.cs" />
-    <Compile Include="SqlServer\MessageExchangePatterns.cs" />
-    <Compile Include="SqlServer\UpgradingV2SubscriberToV3SubscriberWithV3Publisher.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\SqlServerV1\SqlServerV1.csproj" />
+    <ProjectReference Include="..\SqlServerV2\SqlServerV2.csproj" /> 
+    <ProjectReference Include="..\SqlServerV3\SqlServerV3.csproj" />
+    <ProjectReference Include="..\TransportCompatibilityTests.Common\TransportCompatibilityTests.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.ServiceProcess" />
   </ItemGroup>
+  
   <ItemGroup>
-    <ProjectReference Include="..\SqlServerV1\SqlServerV1.csproj">
-      <Project>{b5d74165-91f9-46cf-8523-1775598f5ee6}</Project>
-      <Name>SqlServerV1</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SqlServerV2\SqlServerV2.csproj">
-      <Project>{eeae4525-249c-4aee-be10-bd338d537594}</Project>
-      <Name>SqlServerV2</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SqlServerV3\SqlServerV3.csproj">
-      <Project>{fec856e8-44ee-4e93-8964-32fd236e9df7}</Project>
-      <Name>SqlServerV3</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TransportCompatibilityTests.Common\TransportCompatibilityTests.Common.csproj">
-      <Project>{531AB217-EFFE-428C-8CA0-A8A70C907992}</Project>
-      <Name>TransportCompatibilityTests.Common</Name>
-    </ProjectReference>
+    <PackageReference Include="NUnit" Version="3.7.1" />
+    <PackageReference Include="Particular.CodeRules" Version="0.7.0" PrivateAssets="all" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VersionCheckAnalyzer" Version="3.3.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="3.3.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.NetCore.Analyzers" Version="3.3.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.NetFramework.Analyzers" Version="3.3.0" PrivateAssets="all" />
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.3.3.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.VersionCheckAnalyzer.resources.dll" />
-    <Analyzer Include="..\..\..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.3.3.0\analyzers\dotnet\Microsoft.CodeAnalysis.VersionCheckAnalyzer.dll" />
-    <Analyzer Include="..\..\..\packages\Microsoft.CodeQuality.Analyzers.3.3.0\analyzers\dotnet\cs\Humanizer.dll" />
-    <Analyzer Include="..\..\..\packages\Microsoft.CodeQuality.Analyzers.3.3.0\analyzers\dotnet\cs\Microsoft.CodeQuality.Analyzers.dll" />
-    <Analyzer Include="..\..\..\packages\Microsoft.CodeQuality.Analyzers.3.3.0\analyzers\dotnet\cs\Microsoft.CodeQuality.CSharp.Analyzers.dll" />
-    <Analyzer Include="..\..\..\packages\Microsoft.NetCore.Analyzers.3.3.0\analyzers\dotnet\cs\Microsoft.NetCore.Analyzers.dll" />
-    <Analyzer Include="..\..\..\packages\Microsoft.NetCore.Analyzers.3.3.0\analyzers\dotnet\cs\Microsoft.NetCore.CSharp.Analyzers.dll" />
-    <Analyzer Include="..\..\..\packages\Microsoft.NetFramework.Analyzers.3.3.0\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
-    <Analyzer Include="..\..\..\packages\Microsoft.NetFramework.Analyzers.3.3.0\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
-    <Analyzer Include="..\..\..\packages\Particular.CodeRules.0.7.0\analyzers\dotnet\cs\Particular.CodeRules.dll" />
-    <Analyzer Include="..\..\..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\..\..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.3.3.0\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.3.3.0\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props'))" />
-    <Error Condition="!Exists('..\..\..\packages\Microsoft.CodeQuality.Analyzers.3.3.0\build\Microsoft.CodeQuality.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.CodeQuality.Analyzers.3.3.0\build\Microsoft.CodeQuality.Analyzers.props'))" />
-    <Error Condition="!Exists('..\..\..\packages\Microsoft.NetCore.Analyzers.3.3.0\build\Microsoft.NetCore.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.NetCore.Analyzers.3.3.0\build\Microsoft.NetCore.Analyzers.props'))" />
-    <Error Condition="!Exists('..\..\..\packages\Microsoft.NetFramework.Analyzers.3.3.0\build\Microsoft.NetFramework.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.NetFramework.Analyzers.3.3.0\build\Microsoft.NetFramework.Analyzers.props'))" />
-    <Error Condition="!Exists('..\..\..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.3.3.0\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.3.3.0\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props'))" />
-    <Error Condition="!Exists('..\..\..\packages\Particular.CodeRules.0.7.0\build\Particular.CodeRules.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Particular.CodeRules.0.7.0\build\Particular.CodeRules.props'))" />
-  </Target>
 </Project>
