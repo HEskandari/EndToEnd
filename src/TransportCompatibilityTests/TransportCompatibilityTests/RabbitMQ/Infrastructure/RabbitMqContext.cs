@@ -43,7 +43,7 @@
             ExecuteREST(client =>
             {
                 var result = client.PutAsync(RabbitConnectionStringBuilder.VirtualHostAPI(), new StringContent(String.Empty, null, "application/json")).GetAwaiter().GetResult();
-                return result.StatusCode == HttpStatusCode.NoContent;
+                return result.StatusCode == HttpStatusCode.NoContent || result.StatusCode == HttpStatusCode.Created;
             });
         }
 
