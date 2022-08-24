@@ -6,9 +6,9 @@
 
     public class RabbitConnectionStringBuilder
     {
-        public static string EnvironmentVariable => "RabbitMQ.ConnectionString";
-        public static string VirtualHostApiEnvironmentVariable => "RabbitMQ.VirtualHostAPI";
-        public static string PermissionApiEnvironmentVariable => "RabbitMQ.PermissionAPI";
+        public static string EnvironmentVariable => "RabbitMQ_ConnectionString";
+        public static string VirtualHostApiEnvironmentVariable => "RabbitMQ_VirtualHostAPI";
+        public static string PermissionApiEnvironmentVariable => "RabbitMQ_PermissionAPI";
 
         public static string Build()
         {
