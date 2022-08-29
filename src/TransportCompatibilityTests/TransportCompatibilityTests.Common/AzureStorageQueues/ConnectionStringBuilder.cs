@@ -4,7 +4,7 @@
 
     public class AzureStorageQueuesConnectionStringBuilder
     {
-        public static string EnvironmentVariable => "AzureStorageQueueTransport.ConnectionString";
+        public static string EnvironmentVariable => "AzureStorageQueueTransport_ConnectionString";
 
         public static string Build()
         {

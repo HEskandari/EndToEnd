@@ -10,10 +10,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\SqlServerV1\SqlServerV1.csproj" />
-    <ProjectReference Include="..\SqlServerV2\SqlServerV2.csproj" /> 
-    <ProjectReference Include="..\SqlServerV3\SqlServerV3.csproj" />
-    <ProjectReference Include="..\SqlServerV4\SqlServerV4.csproj" />
     <ProjectReference Include="..\TransportCompatibilityTests.Common\TransportCompatibilityTests.Common.csproj" />
   </ItemGroup>
 
