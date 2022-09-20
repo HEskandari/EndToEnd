@@ -22,7 +22,7 @@
 
         [Category("AzureStorageQueues")]
         [Test, TestCaseSource(nameof(GenerateVersionsPairs))]
-        public void It_is_possible_to_send_command_between_different_versions(int sourceVersion, int destinationVersion)
+        public void It_is_possible_to_send_command_between_different_versions(TransportVersion sourceVersion, TransportVersion destinationVersion)
         {
             sourceEndpointDefinition.Mappings = new[]
             {
@@ -47,7 +47,7 @@
 
         [Category("AzureStorageQueues")]
         [Test, TestCaseSource(nameof(GenerateVersionsPairs))]
-        public void It_is_possible_to_send_request_and_receive_replay(int sourceVersion, int destinationVersion)
+        public void It_is_possible_to_send_request_and_receive_replay(TransportVersion sourceVersion, TransportVersion destinationVersion)
         {
             sourceEndpointDefinition.Mappings = new[]
             {
@@ -71,7 +71,7 @@
 
         [Category("AzureStorageQueues")]
         [Test, TestCaseSource(nameof(GenerateVersionsPairs))]
-        public void It_is_possible_to_publish_events(int sourceVersion, int destinationVersion)
+        public void It_is_possible_to_publish_events(TransportVersion sourceVersion, TransportVersion destinationVersion)
         {
             destinationEndpointDefinition.Publishers = new[]
             {
@@ -110,8 +110,8 @@
                         where l != r
                         select new object[]
                         {
-                    l,
-                    r
+                            TransportVersions.AzureStorageQueues(l),
+                            TransportVersions.AzureStorageQueues(r)
                         };
 
             return pairs.ToArray();

@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net452</TargetFramework>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\GlobalSuppressions.cs"/>
+    <Compile Include="..\..\GlobalSuppressions.cs" />
   </ItemGroup>
   
   <ItemGroup>

@@ -21,7 +21,7 @@
 
         [Category("SqlServer")]
         [Test, TestCaseSource(nameof(GenerateVersionsPairs))]
-        public void Int_callbacks_work(int sourceVersion, int destinationVersion)
+        public void Int_callbacks_work(TransportVersion sourceVersion, TransportVersion destinationVersion)
         {
             sourceEndpointDefinition.Mappings = new[]
             {
@@ -45,7 +45,7 @@
 
         [Category("SqlServer")]
         [Test, TestCaseSource(nameof(GenerateVersionsPairs))]
-        public void Enum_callbacks_work(int sourceVersion, int destinationVersion)
+        public void Enum_callbacks_work(TransportVersion sourceVersion, TransportVersion destinationVersion)
         {
             sourceEndpointDefinition.Mappings = new[]
             {

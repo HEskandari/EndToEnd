@@ -83,7 +83,12 @@
                         from r in versions
                         from t in new[] {Topology.Direct, Topology.Convention}
                         where l != r
-                        select new object[] { l, r, t };
+                        select new object[]
+                        {
+                            TransportVersions.RabbitMq(l), 
+                            TransportVersions.RabbitMq(r), 
+                            t
+                        };
 
             return pairs.ToArray();
         }

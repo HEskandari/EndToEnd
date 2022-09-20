@@ -6,11 +6,11 @@
 
     public class Conventions
     {
-        public static Func<EndpointDefinition, int, string> AssemblyNameResolver =
-            (definition, version) => $"{definition.TransportName}V{version}";
+        public static Func<EndpointDefinition, TransportVersion, string> AssemblyNameResolver =
+            (definition, transportVersion) => $"{definition.TransportName}V{transportVersion.Version}";
 
-        public static Func<EndpointDefinition, int, string> AssemblyDirectoryResolver =
-            (definition, version) =>
+        public static Func<EndpointDefinition, TransportVersion, string> AssemblyDirectoryResolver =
+            (definition, transportVersion) =>
             {
                 var configuration = "Release";
 
@@ -18,30 +18,29 @@
                     configuration = "Debug";
                 #endif
 
-                var assemblyName = AssemblyNameResolver(definition, version);
-                //Hard-coding net452 since the test project itself is hard-coded to that framework
-                var newStyle = Path.Combine(TestContext.CurrentContext.TestDirectory, $"..\\..\\..\\..\\{assemblyName}\\bin\\{configuration}\\net452");
-                if (Directory.Exists(newStyle))
+                var assemblyName = AssemblyNameResolver(definition, transportVersion);
+                var bin = Path.Combine(TestContext.CurrentContext.TestDirectory, $"..\\..\\..\\..\\{assemblyName}\\bin\\{configuration}\\{transportVersion.TargetFramework}");
+                if (Directory.Exists(bin))
                 {
-                    return newStyle;
+                    return bin;
                 }
-                var oldStyle = Path.Combine(TestContext.CurrentContext.TestDirectory, $"..\\..\\..\\{assemblyName}\\bin\\{configuration}");
-                return oldStyle;
+
+                throw new Exception($"Directory '{bin}' was not found");
             };
 
-        public static Func<EndpointDefinition, int, string> AssemblyPathResolver =
-            (definition, version) =>
+        public static Func<EndpointDefinition, TransportVersion, string> AssemblyPathResolver =
+            (definition, transportVersion) =>
             {
-                var assemblyName = AssemblyNameResolver(definition, version);
-                var assemblyDirectory = new DirectoryInfo(AssemblyDirectoryResolver(definition, version));
+                var assemblyName = AssemblyNameResolver(definition, transportVersion);
+                var assemblyDirectory = new DirectoryInfo(AssemblyDirectoryResolver(definition, transportVersion));
 
                 return Path.Combine(assemblyDirectory.FullName, assemblyName + ".dll");
             };
 
-        public static Func<EndpointDefinition, int, string> EndpointFacadeConfiguratorTypeNameResolver =
-            (definition, version) =>
+        public static Func<EndpointDefinition, TransportVersion, string> EndpointFacadeConfiguratorTypeNameResolver =
+            (definition, transportVersion) =>
             {
-                var assemblyName = AssemblyNameResolver(definition, version);
+                var assemblyName = AssemblyNameResolver(definition, transportVersion);
 
                 return $"{assemblyName}.EndpointFacade";
             };

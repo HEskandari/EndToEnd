@@ -21,7 +21,7 @@
 
         [Category("AzureServiceBus")]
         [Test, TestCaseSource(nameof(GenerateVersionsPairs))]
-        public void Int_callbacks_work(int sourceVersion, int destinationVersion)
+        public void Int_callbacks_work(TransportVersion sourceVersion, TransportVersion destinationVersion)
         {
             sourceEndpointDefinition.Mappings = new[]
             {
@@ -45,7 +45,7 @@
 
         [Category("AzureServiceBus")]
         [Test, TestCaseSource(nameof(GenerateVersionsPairs))]
-        public void Enum_callbacks_work(int sourceVersion, int destinationVersion)
+        public void Enum_callbacks_work(TransportVersion sourceVersion, TransportVersion destinationVersion)
         {
             sourceEndpointDefinition.Mappings = new[]
             {
@@ -73,7 +73,11 @@
 
             var pairs = from l in asbTransportVersions
                         from r in asbTransportVersions
-                        select new object[] { l, r };
+                        select new object[]
+                        {
+                            TransportVersions.AzureServiceBus(l),
+                            TransportVersions.AzureServiceBus(r)
+                        };
 
             return pairs.ToArray();
         }

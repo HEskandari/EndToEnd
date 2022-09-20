@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net452</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
+    <RootNamespace>SqlServerV7</RootNamespace>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
@@ -25,8 +26,10 @@
     <PackageReference Include="Microsoft.NetFramework.Analyzers" Version="3.3.0" PrivateAssets="all" />
     <PackageReference Include="Particular.CodeRules" Version="0.7.0" PrivateAssets="all" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="all" />
-    <PackageReference Include="NServiceBus" Version="7.0.0" />
-    <PackageReference Include="NServiceBus.Callbacks" Version="3.0.0" />
-    <PackageReference Include="NServiceBus.SqlServer" Version="4.0.0" />
+    <PackageReference Include="NServiceBus" Version="8.0.0-rc.3" />
+    <PackageReference Include="NServiceBus.Callbacks" Version="4.0.0-rc.2" />
+    <PackageReference Include="NServiceBus.SqlServer" Version="7.0.0-rc.2" />
+    <PackageReference Include="NServiceBus.Persistence.NonDurable" Version="1.0.0-rc.2" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
   </ItemGroup>
 </Project>

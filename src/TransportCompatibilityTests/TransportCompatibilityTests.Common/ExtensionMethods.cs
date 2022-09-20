@@ -12,16 +12,16 @@
             return (T) target;
         }
 
-        public static string TransportAddressForVersion(this RabbitMqEndpointDefinition endpointDefinition, int version)
+        public static string TransportAddressForVersion(this RabbitMqEndpointDefinition endpointDefinition, TransportVersion transportVersion)
         {
-            return (version < 4) ? endpointDefinition.Name + "." + Environment.MachineName : endpointDefinition.Name;
+            return (transportVersion.Version < 4) ? endpointDefinition.Name + "." + Environment.MachineName : endpointDefinition.Name;
         }
 
-        public static string TransportAddressForVersion(this SqlServerEndpointDefinition endpointDefinition, int version)
+        public static string TransportAddressForVersion(this SqlServerEndpointDefinition endpointDefinition, TransportVersion transportVersion)
         {
-            return (version == 1) ? endpointDefinition.Name + "." + Environment.MachineName : endpointDefinition.Name;
+            return transportVersion.Version == 1 ? endpointDefinition.Name + "." + Environment.MachineName : endpointDefinition.Name;
         }
-        public static string TransportAddressForVersion(this AzureServiceBusEndpointDefinition endpointDefinition, int version)
+        public static string TransportAddressForVersion(this AzureServiceBusEndpointDefinition endpointDefinition, TransportVersion version)
         {
             return endpointDefinition.Name;
         }

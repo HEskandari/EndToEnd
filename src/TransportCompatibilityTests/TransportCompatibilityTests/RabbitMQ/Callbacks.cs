@@ -22,7 +22,7 @@
 
         [Category("RabbitMQ")]
         [Test, TestCaseSource(typeof(RabbitMqContext), nameof(GenerateVersionsPairs))]
-        public void Int_callbacks_work(int sourceVersion, int destinationVersion, Topology topology)
+        public void Int_callbacks_work(TransportVersion sourceVersion, TransportVersion destinationVersion, Topology topology)
         {
             destinationEndpointDefinition.RoutingTopology = sourceEndpointDefinition.RoutingTopology = topology;
             sourceEndpointDefinition.Mappings = new[]
@@ -47,7 +47,7 @@
 
         [Category("RabbitMQ")]
         [Test, TestCaseSource(typeof(RabbitMqContext), nameof(GenerateVersionsPairs))]
-        public void Enum_callbacks_work(int sourceVersion, int destinationVersion, Topology topology)
+        public void Enum_callbacks_work(TransportVersion sourceVersion, TransportVersion destinationVersion, Topology topology)
         {
             destinationEndpointDefinition.RoutingTopology = sourceEndpointDefinition.RoutingTopology = topology;
             sourceEndpointDefinition.Mappings = new[]

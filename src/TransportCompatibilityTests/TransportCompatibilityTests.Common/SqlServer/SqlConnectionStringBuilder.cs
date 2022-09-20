@@ -9,7 +9,8 @@
         public static string Build()
         {
             var value = Environment.GetEnvironmentVariable(EnvironmentVariable, EnvironmentVariableTarget.User);
-            return value ?? Environment.GetEnvironmentVariable(EnvironmentVariable);
+            var v2 = Environment.GetEnvironmentVariable(EnvironmentVariable);
+            return value ?? v2;
         }
     }
 }

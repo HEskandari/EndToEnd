@@ -9,6 +9,8 @@
         public string Schema { get; set; }
         public MessageMapping[] Mappings { get; set; }
         public MessageMapping[] Publishers { get; set; }
+        
+        public bool UseNativePubSub { get; set; }
 
         public SqlServerEndpointDefinition()
         {
