@@ -4,7 +4,7 @@
 
     public class AzureServiceBusConnectionStringBuilder
     {
-        public static string EnvironmentVariable => "AzureServiceBus.ConnectionString";
+        public static string EnvironmentVariable => "AzureServiceBus_ConnectionString";
 
         public static string Build()
         {

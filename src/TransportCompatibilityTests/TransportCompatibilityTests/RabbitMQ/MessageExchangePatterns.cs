@@ -23,7 +23,7 @@
 
         [Category("RabbitMQ")]
         [Test, TestCaseSource(typeof(RabbitMqContext), nameof(GenerateVersionsPairs))]
-        public void It_is_possible_to_send_command_between_different_versions(int sourceVersion, int destinationVersion, Topology topology)
+        public void It_is_possible_to_send_command_between_different_versions(TransportVersion sourceVersion, TransportVersion destinationVersion, Topology topology)
         {
             destinationEndpointDefinition.RoutingTopology = sourceEndpointDefinition.RoutingTopology = topology;
             sourceEndpointDefinition.Mappings = new []
@@ -48,7 +48,7 @@
 
         [Category("RabbitMQ")]
         [Test, TestCaseSource(typeof(RabbitMqContext), nameof(GenerateVersionsPairs))]
-        public void It_is_possible_to_publish_events(int sourceVersion, int destinationVersion, Topology topology)
+        public void It_is_possible_to_publish_events(TransportVersion sourceVersion, TransportVersion destinationVersion, Topology topology)
         {
             destinationEndpointDefinition.RoutingTopology = sourceEndpointDefinition.RoutingTopology = topology;
 
@@ -65,7 +65,7 @@
 
         [Category("RabbitMQ")]
         [Test, TestCaseSource(typeof(RabbitMqContext), nameof(GenerateVersionsPairs))]
-        public void It_is_possible_to_send_request_and_receive_reply(int sourceVersion, int destinationVersion, Topology topology)
+        public void It_is_possible_to_send_request_and_receive_reply(TransportVersion sourceVersion, TransportVersion destinationVersion, Topology topology)
         {
             destinationEndpointDefinition.RoutingTopology = sourceEndpointDefinition.RoutingTopology = topology;
             sourceEndpointDefinition.Mappings = new[]

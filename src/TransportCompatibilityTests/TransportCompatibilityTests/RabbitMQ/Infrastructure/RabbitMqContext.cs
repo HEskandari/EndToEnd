@@ -14,11 +14,6 @@
         [SetUp]
         public void CommonSetUp()
         {
-#if DEBUG
-            Environment.SetEnvironmentVariable(RabbitConnectionStringBuilder.EnvironmentVariable, "host=localhost;VirtualHost=test", EnvironmentVariableTarget.User);
-            Environment.SetEnvironmentVariable(RabbitConnectionStringBuilder.PermissionApiEnvironmentVariable, "http://localhost:15672/api/permissions/test/guest", EnvironmentVariableTarget.User);
-            Environment.SetEnvironmentVariable(RabbitConnectionStringBuilder.VirtualHostApiEnvironmentVariable, "http://localhost:15672/api/vhosts/test", EnvironmentVariableTarget.User);
-#endif
             if (string.IsNullOrWhiteSpace(RabbitConnectionStringBuilder.Build()))
             {
                 throw new Exception($"Environment variables `{RabbitConnectionStringBuilder.EnvironmentVariable}`, `{RabbitConnectionStringBuilder.PermissionApiEnvironmentVariable}` and `{RabbitConnectionStringBuilder.VirtualHostApiEnvironmentVariable}` are required to connect to RabbitMQ.");
@@ -43,7 +38,7 @@
             ExecuteREST(client =>
             {
                 var result = client.PutAsync(RabbitConnectionStringBuilder.VirtualHostAPI(), new StringContent(String.Empty, null, "application/json")).GetAwaiter().GetResult();
-                return result.StatusCode == HttpStatusCode.NoContent;
+                return result.StatusCode == HttpStatusCode.NoContent || result.StatusCode == HttpStatusCode.Created;
             });
         }
 
@@ -88,7 +83,12 @@
                         from r in versions
                         from t in new[] {Topology.Direct, Topology.Convention}
                         where l != r
-                        select new object[] { l, r, t };
+                        select new object[]
+                        {
+                            TransportVersions.RabbitMq(l), 
+                            TransportVersions.RabbitMq(r), 
+                            t
+                        };
 
             return pairs.ToArray();
         }

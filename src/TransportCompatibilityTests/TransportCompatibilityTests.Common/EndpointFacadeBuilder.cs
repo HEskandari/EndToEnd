@@ -7,10 +7,10 @@
 
     public class EndpointFacadeBuilder
     {
-        public static IEndpointFacade CreateAndConfigure<TEndpointDefinition>(TEndpointDefinition endpointDefinition, int version)
+        public static IEndpointFacade CreateAndConfigure<TEndpointDefinition>(TEndpointDefinition endpointDefinition, TransportVersion transportVersion)
            where TEndpointDefinition : EndpointDefinition
         {
-            var startupDirectory = new DirectoryInfo(Conventions.AssemblyDirectoryResolver(endpointDefinition, version));
+            var startupDirectory = new DirectoryInfo(Conventions.AssemblyDirectoryResolver(endpointDefinition, transportVersion));
 
             var appDomain = AppDomain.CreateDomain(
                 startupDirectory.Name,
@@ -18,11 +18,11 @@
                 new AppDomainSetup
                 {
                     ApplicationBase = startupDirectory.FullName,
-                    ConfigurationFile = Path.Combine(startupDirectory.FullName, $"{endpointDefinition.TransportName}V{version}.dll.config")
+                    ConfigurationFile = Path.Combine(startupDirectory.FullName, $"{endpointDefinition.TransportName}V{transportVersion}.dll.config")
                 });
 
-            var assemblyPath = Conventions.AssemblyPathResolver(endpointDefinition, version);
-            var typeName = Conventions.EndpointFacadeConfiguratorTypeNameResolver(endpointDefinition, version);
+            var assemblyPath = Conventions.AssemblyPathResolver(endpointDefinition, transportVersion);
+            var typeName = Conventions.EndpointFacadeConfiguratorTypeNameResolver(endpointDefinition, transportVersion);
 
             var facade = (IEndpointFacade)appDomain.CreateInstanceFromAndUnwrap(assemblyPath, typeName);
             facade.Bootstrap(endpointDefinition);

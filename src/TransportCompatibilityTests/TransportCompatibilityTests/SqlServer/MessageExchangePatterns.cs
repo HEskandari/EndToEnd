@@ -31,7 +31,7 @@ namespace TransportCompatibilityTests.SqlServer
 
         [Category("SqlServer")]
         [Test, TestCaseSource(nameof(GenerateVersionsPairs))]
-        public void It_is_possible_to_send_command_between_different_versions(int sourceVersion, int destinationVersion)
+        public void It_is_possible_to_send_command_between_different_versions(TransportVersion sourceVersion, TransportVersion destinationVersion)
         {
             sourceEndpointDefinition.Mappings = new[]
             {
@@ -57,7 +57,7 @@ namespace TransportCompatibilityTests.SqlServer
 
         [Category("SqlServer")]
         [Test, TestCaseSource(nameof(GenerateVersionsPairs))]
-        public void It_is_possible_to_send_request_and_receive_replay(int sourceVersion, int destinationVersion)
+        public void It_is_possible_to_send_request_and_receive_replay(TransportVersion sourceVersion, TransportVersion destinationVersion)
         {
             sourceEndpointDefinition.Mappings = new[]
             {
@@ -82,8 +82,8 @@ namespace TransportCompatibilityTests.SqlServer
         }
 
         [Category("SqlServer")]
-        [Test, TestCaseSource(nameof(GenerateVersionsPairs))]
-        public void It_is_possible_to_publish_events(int sourceVersion, int destinationVersion)
+        [Test, TestCaseSource(nameof(GenerateMessageDrivenPubSubVersionsPairs))]
+        public void It_is_possible_to_publish_events(TransportVersion sourceVersion, TransportVersion destinationVersion)
         {
             destinationEndpointDefinition.Publishers = new[]
             {
@@ -111,7 +111,7 @@ namespace TransportCompatibilityTests.SqlServer
 
         [Category("SqlServer")]
         [Test, TestCaseSource(nameof(GenerateVersionsPairs))]
-        public void It_is_possible_to_send_and_receive_using_custom_schema_in_transport_address(int sourceVersion, int destinationVersion)
+        public void It_is_possible_to_send_and_receive_using_custom_schema_in_transport_address(TransportVersion sourceVersion, TransportVersion destinationVersion)
         {
             sourceEndpointDefinition.Schema = SourceSchema;
             sourceEndpointDefinition.Mappings = new[]
@@ -127,7 +127,7 @@ namespace TransportCompatibilityTests.SqlServer
             destinationEndpointDefinition.Schema = DestinationSchema;
 
             //TODO: this is a hack, passing mappings should be separate from passing schemas
-            if (sourceVersion == 2 && destinationVersion == 3)
+            if (sourceVersion.Version == 2 && destinationVersion.Version == 3)
             {
                 destinationEndpointDefinition.Mappings = new[]
                 {
@@ -172,7 +172,9 @@ namespace TransportCompatibilityTests.SqlServer
                 1,
                 2,
                 3,
-                4
+                4,
+                5,
+                6,
             };
 
             var pairs = from l in sqlTransportVersions
@@ -180,8 +182,32 @@ namespace TransportCompatibilityTests.SqlServer
                 where l != r
                 select new object[]
                 {
-                    l,
-                    r
+                    TransportVersions.SqlTransportVersion(l),
+                    TransportVersions.SqlTransportVersion(r),
+                };
+
+            return pairs.ToArray();
+        }
+        
+        static object[][] GenerateMessageDrivenPubSubVersionsPairs()
+        {
+            var sqlTransportVersions = new[]
+            {
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+            };
+
+            var pairs = from l in sqlTransportVersions
+                from r in sqlTransportVersions
+                where l != r
+                select new object[]
+                {
+                    TransportVersions.SqlTransportVersion(l),
+                    TransportVersions.SqlTransportVersion(r),
                 };
 
             return pairs.ToArray();

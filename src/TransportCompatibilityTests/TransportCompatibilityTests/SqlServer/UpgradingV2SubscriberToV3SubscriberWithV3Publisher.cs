@@ -35,12 +35,12 @@ namespace TransportCompatibilityTests.SqlServer
                 new MessageMapping
                 {
                     MessageType = typeof(TestEvent),
-                    TransportAddress = publisherDefinition.TransportAddressForVersion(3)
+                    TransportAddress = publisherDefinition.TransportAddressForVersion(TransportVersions.SqlTransportVersion(3))
                 }
             };
 
-            using (var publisher = EndpointFacadeBuilder.CreateAndConfigure(publisherDefinition, 3))
-            using (var subscriber = EndpointFacadeBuilder.CreateAndConfigure(subscriberDefinition, 2))
+            using (var publisher = EndpointFacadeBuilder.CreateAndConfigure(publisherDefinition, TransportVersions.SqlTransportVersion(3)))
+            using (var subscriber = EndpointFacadeBuilder.CreateAndConfigure(subscriberDefinition, TransportVersions.SqlTransportVersion(2)))
             {
                 AssertEx.WaitUntilIsTrue(() => publisher.NumberOfSubscriptions > 0);
 
@@ -59,12 +59,12 @@ namespace TransportCompatibilityTests.SqlServer
                 new MessageMapping
                 {
                     MessageType = typeof(TestEvent),
-                    TransportAddress = publisherDefinition.TransportAddressForVersion(3)
+                    TransportAddress = publisherDefinition.TransportAddressForVersion(TransportVersions.SqlTransportVersion(3))
                 }
             };
 
-            using (var publisher = EndpointFacadeBuilder.CreateAndConfigure(publisherDefinition, 3))
-            using (var subscriber = EndpointFacadeBuilder.CreateAndConfigure(subscriberDefinition, 3))
+            using (var publisher = EndpointFacadeBuilder.CreateAndConfigure(publisherDefinition, TransportVersions.SqlTransportVersion(3)))
+            using (var subscriber = EndpointFacadeBuilder.CreateAndConfigure(subscriberDefinition, TransportVersions.SqlTransportVersion(3)))
             {
                 AssertEx.WaitUntilIsTrue(() => publisher.NumberOfSubscriptions > 0);
 

@@ -3,15 +3,20 @@ using NServiceBus;
 using TransportCompatibilityTests.Common;
 using TransportCompatibilityTests.Common.Messages;
 
-namespace SqlServerV4
+namespace SqlServerV7
 {
     public class Handler : IHandleMessages<TestCommand>, IHandleMessages<TestRequest>, IHandleMessages<TestResponse>, IHandleMessages<TestEvent>, IHandleMessages<TestIntCallback>, IHandleMessages<TestEnumCallback>
     {
-        public MessageStore Store { get; set; }
-
+        private MessageStore store;
+        
+        public Handler(MessageStore store)
+        {
+            this.store = store;
+        }
+        
         public Task Handle(TestCommand command, IMessageHandlerContext context)
         {
-            Store.Add<TestCommand>(command.Id);
+            store.Add<TestCommand>(command.Id);
 
             return Task.FromResult(0);
         }
@@ -23,14 +28,14 @@ namespace SqlServerV4
 
         public Task Handle(TestResponse message, IMessageHandlerContext context)
         {
-            Store.Add<TestResponse>(message.ResponseId);
+            store.Add<TestResponse>(message.ResponseId);
 
             return Task.FromResult(0);
         }
 
         public Task Handle(TestEvent message, IMessageHandlerContext context)
         {
-            Store.Add<TestEvent>(message.EventId);
+            store.Add<TestEvent>(message.EventId);
 
             return Task.FromResult(0);
         }

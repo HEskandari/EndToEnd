@@ -3,7 +3,7 @@ using NServiceBus;
 using TransportCompatibilityTests.Common;
 using TransportCompatibilityTests.Common.Messages;
 
-namespace SqlServerV4
+namespace SqlServerV6
 {
     public class Handler : IHandleMessages<TestCommand>, IHandleMessages<TestRequest>, IHandleMessages<TestResponse>, IHandleMessages<TestEvent>, IHandleMessages<TestIntCallback>, IHandleMessages<TestEnumCallback>
     {

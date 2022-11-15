@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net452</TargetFramework>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,13 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NServiceBus" Version="7.0.0-beta0012" />
-    <PackageReference Include="NServiceBus.AmazonSQS" Version="4.0.0-beta0007" />
-    <PackageReference Include="NServiceBus.Callbacks" Version="3.0.0-beta0003" />
-    <PackageReference Include="Particular.CodeRules" Version="0.7.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="NServiceBus" Version="7.0.1" />
+    <PackageReference Include="NServiceBus.AmazonSQS" Version="4.0.0" />
+    <PackageReference Include="NServiceBus.Callbacks" Version="3.0.0" />
+    <PackageReference Include="Particular.CodeRules" Version="0.7.0" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
